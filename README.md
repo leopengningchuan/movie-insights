@@ -1,6 +1,15 @@
 # movie-insights
 Exploring movie data with Python — from insights to recommendations
 
+## Table of Contents
+- [Project Background](#project-background)
+- [Project Goal](#project-goal)
+- [File Structure](#file-structure)
+- [Instructions](#instructions)
+  - [1. Packages Used](#1-packages-used)
+  - [2. Data Used](#2-data-used)
+- [License](#license)
+
 ## Project Background
 In the film industry, making sense of large volumes of movie data is key to understanding what drives audience interest and box office success. With thousands of movies spanning decades, structured analysis can uncover hidden patterns and improve decision-making for studios, streaming platforms, and viewers alike.
 
@@ -9,12 +18,14 @@ This project leverages [The Movies Dataset](https://www.kaggle.com/datasets/roun
 ## Project Goal
 This project aims to analyze movie metadata using **Python Jupyter Notebook** to uncover patterns in film performance and audience preferences. It further develops and compares multiple types of recommendation systems to generate personalized movie suggestions based on different modeling approaches.
 
-## Table of Contents
-- README.md
-- LICENSE.txt
-- movies_cleaned.csv
-- data cleaning.ipynb
-- recommendation_algorithm.ipynb
+## File Structure
+- `README.md` – project overview
+- `LICENSE.txt` – license information
+- `.gitignore` – git ignore config
+- `.gitattributes` – git attributes config
+- `data cleaning.ipynb`
+- `recommendation_algorithm.ipynb`
+- `movies_cleaned.csv`
 
 ## Instructions
 
