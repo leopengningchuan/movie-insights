@@ -29,7 +29,7 @@ This project aims to analyze movie metadata using **Python Jupyter Notebook** to
 
 ## Instructions
 
-### 1. Package Used
+### 1. Packages Used
 - `pandas, datetime, numpy`: for data manipulation
 - `ast`: for processing abstract syntax grammar
 - `matplotlib`: for data visualization
