@@ -1,3 +1,4 @@
 .DS_Store
 .ipynb_checkpoints/*.ipynb
-original_data/*.csv
+original_data/ratings.csv
+original_data/credits.csv
