@@ -7,7 +7,13 @@ Exploring movie data with Python — from insights to recommendations
 - [File Structure](#file-structure)
 - [Instructions](#instructions)
   - [1. Packages Used](#1-packages-used)
-  - [2. Data Used](#2-data-used)
+  - [2. Datasets Used](#2-datasets-used)
+  - [3. Data Cleaning](#3-data-cleaning)
+    - [movies_metadata](#movies_metadata)
+    - [ratings_small & ratings](#ratings_small--ratings)
+  - [4. Exploratory Data Analysis](#exploratory-data-analysis)
+  - [5. Recommendation Algorithm](#recommendation-algorithm)
+- [Future Improvements](#future-improvements)
 - [License](#license)
 
 ## Project Background
@@ -30,15 +36,16 @@ This project aims to analyze movie metadata using **Python Jupyter Notebook** to
 ## Instructions
 
 ### 1. Packages Used
-- `pandas, datetime, numpy`: for data manipulation
+- `pandas`, `datetime`, `numpy`, `itertools`: for data manipulation
+- `os`: for file path handling
 - `ast`: for processing abstract syntax grammar
 - `matplotlib`: for data visualization
 - `sklearn`: for modeling
 
-### 2. Dataset Used
+### 2. Datasets Used
 This project uses [The Movies Dataset](https://www.kaggle.com/datasets/rounakbanik/the-movies-dataset/data?status=pending&select=movies_metadata.csv) from Kaggle, which contains metadata for over 45,000 movies, including information on genres, cast, crew, release dates, budgets, revenues, and user ratings. Additional files such as ratings and credits support deeper analysis and the development of various recommendation models.
 
-Due to their large file sizes, the following datasets are not included in the GitHub repository:
+Due to their large file sizes, the following datasets in the folder `original_data/` are not included in the GitHub repository:
 - `links_small.csv`
 - `links.csv`
 - `credits.csv`
@@ -47,10 +54,31 @@ Due to their large file sizes, the following datasets are not included in the Gi
 - `ratings_small.csv`
 - `keywords.csv`
 
-The `data cleaning.ipynb` notebook generates a cleaned version of the movie dataset, saved as `movies_cleaned.csv`. This file serves as a standardized and preprocessed dataset for use in subsequent analysis and model development.
+The `data cleaning.ipynb` notebook generates a cleaned version of the movie dataset, saved as following files in the folder `cleaned_data/`:
+- `movies_cleaned.csv`
+- `movie_metadata_supporting.xlsx`
+- `ratings_cleaned.csv`
+- `ratings_small_cleaned.csv`
+
+These files serve as standardized and preprocessed datasets for use in subsequent analysis and model development.
 
 ### 3. Data Cleaning
 
+#### movies_metadata
+The `movies_metadata` dataset is cleaned and enriched using the `keywords` and `credits` datasets to prepare for analysis:
+- Performed general data cleaning on fields such as `id`, `budget`, `popularity`, and `release_date`, including type conversions and removal of invalid rows.
+- Merged additional metadata (e.g. `keywords`, `cast`, and `crew`) from the `keywords` and `credits` datasets based on movie `id`.
+- Parsed structured string fields (e.g. `genres`, `cast`, `crew`, `keywords`, etc.) into native Python lists and dictionaries.
+- Simplified list/dictionary fields by retaining only the `id`, and saved the supporting metadata to `movie_metadata_supporting.xlsx`.
+- Removed irrelevant or redundant columns to streamline the dataset for downstream use.
+- Saved the cleaned dataset to `movies_cleaned.csv`.
+
+#### ratings_small & ratings
+The `ratings_small` and `ratings` dataset are cleaned and enriched using the `links` datasets to prepare for analysis:
+- Converted `timestamp` fields into readable datetime format and stored as `date_time`.
+- Mapped `movieId` to `imdb_id` using the links dataset for compatibility with external metadata.
+- Renamed columns for clarity and selected only relevant columns.
+- Saved the cleaned dataset to `ratings_small_cleaned.csv` and `ratings_cleaned.csv`.
 
 ### 4. EDA
 
