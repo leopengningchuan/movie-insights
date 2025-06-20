@@ -100,23 +100,27 @@ Several recommendation strategies were implemented to suggest movies based on us
 #### 5.1 Top Weighted Rating Recommendation
 To highlight high-quality movies with sufficient audience engagement, a weighted rating formula was used to rank movies more fairly:
 
-\[
-\text{weighted\_rating} = \frac{v \cdot R + m \cdot C}{v + m}
-\]
+**weighted_rating = (v × R + m × C) / (v + m)**
 
 Where:
-- \( R \): average rating of the movie  
-- \( v \): number of votes for the movie  
-- \( m \): number of votes threshold for qualified movies
-- \( C \): mean rating across all movies
+- **R**: average rating of the movie  
+- **v**: number of votes for the movie  
+- **m**: number of votes threshold for qualified movies
+- **C**: mean rating across all movies
 
 Movies with vote counts above the threshold (using 75th percentile in this case) were considered "qualified" for ranking. The final `weighted_rating` was computed for each, and the top 20 were selected as overall recommendations. In addition, the top 10 highest-rated movies (by weighted score) were identified within each genre to support genre-based browsing.
 
-#### 5.2 Recommendation by Favorite Genre¶
+#### 5.2 Recommendation by Favorite Genre
+This method generates personalized recommendations by identifying the genres most preferred by a given user. The process begins by retrieving all movies the user has rated and selecting those with the highest scores. Based on the genre indicators of these top-rated movies, the user's favorite genres are inferred.
 
+Once the preferred genres are determined, the system filters out movies the user has already seen and searches the remaining qualified movies for those belonging to the same genres. These candidate movies are then ranked by their weighted rating score to ensure quality and popularity. The final result is a list of top recommendations that match the user's taste profile while maintaining high content quality.
 
 #### 5.3 Collaborative Filtering
+This approach leverages user-to-user collaborative filtering to generate personalized movie recommendations based on rating patterns. A user–item rating matrix was constructed from the `ratings_small_cleaned` dataset, with missing values filled as zeros for similarity computation. Cosine similarity was then used to calculate the similarity between users.
 
+For a target user, the top 10 most similar users were identified. Their ratings were aggregated using a similarity-weighted average to estimate the target user's potential interest in unseen movies. Movies already rated by the user were excluded, and the top-scoring titles—ranked by both weighted score and average similarity—were selected as recommendations.
+
+This method is effective for capturing nuanced user preferences based on community behavior, particularly when overlapping movie ratings exist between users.
 
 ## Future Improvements
 - **Content-Based Movie Recommendation**: Implement a content recommendation algorithm to suggest movies with similar attributes (e.g., genre, cast, keywords).
