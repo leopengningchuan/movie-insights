@@ -9,10 +9,13 @@ Exploring movie data with Python — from insights to recommendations
   - [1. Packages Used](#1-packages-used)
   - [2. Datasets Used](#2-datasets-used)
   - [3. Data Cleaning](#3-data-cleaning)
-    - [movies_metadata](#movies_metadata)
-    - [ratings_small & ratings](#ratings_small--ratings)
-  - [4. Exploratory Data Analysis](#exploratory-data-analysis)
-  - [5. Recommendation Algorithm](#recommendation-algorithm)
+    - [3.1 movies_metadata](#31-movies_metadata)
+    - [3.2 ratings_small & ratings](#32-ratings_small--ratings)
+  - [4. Exploratory Data Analysis](#4-exploratory-data-analysis)
+  - [5. Recommendation Algorithms](#5-recommendation-algorithms)
+    - [5.1 Top Weighted Rating Recommendation](#51-top-weighted-rating-recommendation)
+    - [5.2 Recommendation by Favorite Genre](#52-recommendation-by-favorite-genre)
+    - [5.3 Collaborative Filtering](#53-collaborative-filtering)
 - [Future Improvements](#future-improvements)
 - [License](#license)
 
@@ -29,9 +32,13 @@ This project aims to analyze movie metadata using **Python Jupyter Notebook** to
 - `LICENSE.txt` – license information
 - `.gitignore` – git ignore config
 - `.gitattributes` – git attributes config
-- `data cleaning.ipynb`
-- `recommendation_algorithm.ipynb`
-- `movies_cleaned.csv`
+- `data_cleaning.ipynb` – notebook for data cleaning
+- `exploratory_data_analysis.ipynb` – notebook for exploratory data analysis
+- `recommendation_algorithm.ipynb` – notebook for recommendation algorithm
+- `cleaned_data/` – folder containing processed datasets
+  - `movies_cleaned.csv` – cleaned movie metadata
+  - `movie_metadata_supporting.xlsx` – extracted lookup tables from structured fields
+  - `ratings_small_cleaned.csv` – cleaned subset of user ratings
 
 ## Instructions
 
@@ -57,14 +64,15 @@ Due to their large file sizes, the following datasets in the folder `original_da
 The `data cleaning.ipynb` notebook generates a cleaned version of the movie dataset, saved as following files in the folder `cleaned_data/`:
 - `movies_cleaned.csv`
 - `movie_metadata_supporting.xlsx`
-- `ratings_cleaned.csv`
 - `ratings_small_cleaned.csv`
+- `ratings_cleaned.csv`
 
 These files serve as standardized and preprocessed datasets for use in subsequent analysis and model development.
 
 ### 3. Data Cleaning
+To ensure consistency and usability, raw datasets were cleaned and standardized before analysis and modeling. This included type conversion, missing value handling, metadata merging, and structured field parsing across multiple files.
 
-#### movies_metadata
+#### 3.1 movies_metadata
 The `movies_metadata` dataset is cleaned and enriched using the `keywords` and `credits` datasets to prepare for analysis:
 - Performed general data cleaning on fields such as `id`, `budget`, `popularity`, and `release_date`, including type conversions and removal of invalid rows.
 - Merged additional metadata (e.g. `keywords`, `cast`, and `crew`) from the `keywords` and `credits` datasets based on movie `id`.
@@ -73,21 +81,46 @@ The `movies_metadata` dataset is cleaned and enriched using the `keywords` and `
 - Removed irrelevant or redundant columns to streamline the dataset for downstream use.
 - Saved the cleaned dataset to `movies_cleaned.csv`.
 
-#### ratings_small & ratings
-The `ratings_small` and `ratings` dataset are cleaned and enriched using the `links` datasets to prepare for analysis:
+#### 3.2 ratings_small & ratings
+The `ratings_small` and `ratings` datasets are cleaned and enriched using the `links` datasets to prepare for analysis:
 - Converted `timestamp` fields into readable datetime format and stored as `date_time`.
-- Mapped `movieId` to `imdb_id` using the links dataset for compatibility with external metadata.
+- Mapped `movieId` to `imdb_id` using the `links` dataset for compatibility with external metadata.
 - Renamed columns for clarity and selected only relevant columns.
 - Saved the cleaned dataset to `ratings_small_cleaned.csv` and `ratings_cleaned.csv`.
 
-### 4. EDA
-
+### 4. Exploratory Data Analysis
+Exploratory Data Analysis (EDA) was conducted on the `movies_cleaned` dataset to uncover patterns in production and audience reception:
+- Relationship between genre and average vote rating  
+- Trends in movie count and vote count over release years  
+- Trends in average vote rating over release years  
 
 ### 5. Recommendation Algorithm
+Several recommendation strategies were implemented to suggest movies based on user preferences and content features.
+
+#### 5.1 Top Weighted Rating Recommendation
+To highlight high-quality movies with sufficient audience engagement, a weighted rating formula was used to rank movies more fairly:
+
+\[
+\text{weighted\_rating} = \frac{v \cdot R + m \cdot C}{v + m}
+\]
+
+Where:
+- \( R \): average rating of the movie  
+- \( v \): number of votes for the movie  
+- \( m \): number of votes threshold for qualified movies
+- \( C \): mean rating across all movies
+
+Movies with vote counts above the threshold (using 75th percentile in this case) were considered "qualified" for ranking. The final `weighted_rating` was computed for each, and the top 20 were selected as overall recommendations. In addition, the top 10 highest-rated movies (by weighted score) were identified within each genre to support genre-based browsing.
+
+#### 5.2 Recommendation by Favorite Genre¶
+
+
+#### 5.3 Collaborative Filtering
 
 
 ## Future Improvements
-
+- **Content-Based Movie Recommendation**: Implement a content recommendation algorithm to suggest movies with similar attributes (e.g., genre, cast, keywords).
+- **Popularity‐Adjusted Recommendation**: Blend personalized suggestions with popularity to balance novelty and relevance.
 
 ## License
 This project is licensed under the MIT License - see the [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/leopengningchuan/movie-insights?tab=MIT-1-ov-file) file for details.
