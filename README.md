@@ -22,7 +22,7 @@ Exploring movie data with Python — from insights to recommendations
 ## Project Background
 In the film industry, making sense of large volumes of movie data is key to understanding what drives audience interest and box office success. With thousands of movies spanning decades, structured analysis can uncover hidden patterns and improve decision-making for studios, streaming platforms, and viewers alike.
 
-This project leverages [The Movies Dataset](https://www.kaggle.com/datasets/rounakbanik/the-movies-dataset/data?status=pending&select=movies_metadata.csv) from Kaggle to explore the landscape of film production and reception through data-driven methods. It combines exploratory analysis with several recommendation systems to uncover trends and generate personalized movie suggestions, highlighting the practical value of data science in the creative industry.
+This project leverages [*The Movies Dataset*](https://www.kaggle.com/datasets/rounakbanik/the-movies-dataset/data?status=pending&select=movies_metadata.csv) from Kaggle to explore the landscape of film production and reception through data-driven methods. It combines exploratory analysis with several recommendation systems to uncover trends and generate personalized movie suggestions, highlighting the practical value of data science in the creative industry.
 
 ## Project Goal
 This project aims to analyze movie metadata using **Python Jupyter Notebook** to uncover patterns in film performance and audience preferences. It further develops and compares multiple types of recommendation systems to generate personalized movie suggestions based on different modeling approaches.
@@ -35,6 +35,14 @@ This project aims to analyze movie metadata using **Python Jupyter Notebook** to
 - `data_cleaning.ipynb` – notebook for data cleaning
 - `exploratory_data_analysis.ipynb` – notebook for exploratory data analysis
 - `recommendation_algorithm.ipynb` – notebook for recommendation algorithm
+- `original_data/` – directory containing raw data files from the original Kaggle dataset
+  - `movies_metadata.csv` – raw movie metadata
+  - `credits.csv` – raw cast and crew information
+  - `keywords.csv` – raw keywords associated with each movie
+  - `links.csv` – mapping between TMDb and IMDb IDs
+  - `links_small.csv` – smaller version of the `links.csv` file
+  - `ratings.csv` – full user rating dataset
+  - `ratings_small.csv` – sample of the full ratings dataset
 - `cleaned_data/` – folder containing processed datasets
   - `movies_cleaned.csv` – cleaned movie metadata
   - `movie_metadata_supporting.xlsx` – extracted lookup tables from structured fields
@@ -50,24 +58,9 @@ This project aims to analyze movie metadata using **Python Jupyter Notebook** to
 - `sklearn`: for modeling
 
 ### 2. Datasets Used
-This project uses [The Movies Dataset](https://www.kaggle.com/datasets/rounakbanik/the-movies-dataset/data?status=pending&select=movies_metadata.csv) from Kaggle, which contains metadata for over 45,000 movies, including information on genres, release dates, budgets, revenues, and user ratings. Additional files such as ratings and credits support deeper analysis and the development of various recommendation models.
+This project uses [*The Movies Dataset*](https://www.kaggle.com/datasets/rounakbanik/the-movies-dataset/data?status=pending&select=movies_metadata.csv) from Kaggle, which contains metadata for over 45,000 movies, including information on genres, release dates, budgets, revenues, and user ratings. Additional files such as ratings and credits support deeper analysis and the development of various recommendation models.
 
-Due to their large file sizes, the following original datasets from the website are not included in the GitHub repository:
-- `links_small.csv`
-- `links.csv`
-- `credits.csv`
-- `movies_metadata.csv`
-- `ratings.csv`
-- `ratings_small.csv`
-- `keywords.csv`
-
-The `data cleaning.ipynb` notebook generates a cleaned version of datasets, saved as following files in the folder `cleaned_data/`:
-- `movies_cleaned.csv`
-- `movie_metadata_supporting.xlsx`
-- `ratings_small_cleaned.csv`
-- `ratings_cleaned.csv` (Omitted from version control due to size constraints)
-
-These files serve as standardized and preprocessed datasets for use in subsequent analysis and model development.
+Both raw and cleaned versions of the data are included in the repository under the `original_data/` and `cleaned_data/` directories, respectively. For detailed file listings and descriptions, see the [File Structure](#file-structure) section.
 
 ### 3. Data Cleaning
 To ensure consistency and usability, raw datasets were cleaned and standardized before analysis and modeling. This included type conversion, missing value handling, metadata merging, and structured field parsing across multiple files.
@@ -128,3 +121,6 @@ This method is effective for capturing nuanced user preferences based on communi
 
 ## License
 This project is licensed under the MIT License - see the [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/leopengningchuan/movie-insights?tab=MIT-1-ov-file) file for details.
+
+## Acknowledgements
+- Thanks to [Kaggle](https://www.kaggle.com/datasets/rounakbanik/the-movies-dataset) and the original dataset contributor [Rounak Banik](https://www.kaggle.com/rounakbanik) for providing *The Movies Dataset*.
