@@ -50,9 +50,9 @@ This project aims to analyze movie metadata using **Python Jupyter Notebook** to
 - `sklearn`: for modeling
 
 ### 2. Datasets Used
-This project uses [The Movies Dataset](https://www.kaggle.com/datasets/rounakbanik/the-movies-dataset/data?status=pending&select=movies_metadata.csv) from Kaggle, which contains metadata for over 45,000 movies, including information on genres, cast, crew, release dates, budgets, revenues, and user ratings. Additional files such as ratings and credits support deeper analysis and the development of various recommendation models.
+This project uses [The Movies Dataset](https://www.kaggle.com/datasets/rounakbanik/the-movies-dataset/data?status=pending&select=movies_metadata.csv) from Kaggle, which contains metadata for over 45,000 movies, including information on genres, release dates, budgets, revenues, and user ratings. Additional files such as ratings and credits support deeper analysis and the development of various recommendation models.
 
-Due to their large file sizes, the following datasets in the folder `original_data/` are not included in the GitHub repository:
+Due to their large file sizes, the following original datasets from the website are not included in the GitHub repository:
 - `links_small.csv`
 - `links.csv`
 - `credits.csv`
@@ -61,11 +61,11 @@ Due to their large file sizes, the following datasets in the folder `original_da
 - `ratings_small.csv`
 - `keywords.csv`
 
-The `data cleaning.ipynb` notebook generates a cleaned version of the movie dataset, saved as following files in the folder `cleaned_data/`:
+The `data cleaning.ipynb` notebook generates a cleaned version of datasets, saved as following files in the folder `cleaned_data/`:
 - `movies_cleaned.csv`
 - `movie_metadata_supporting.xlsx`
 - `ratings_small_cleaned.csv`
-- `ratings_cleaned.csv`
+- `ratings_cleaned.csv` (Omitted from version control due to size constraints)
 
 These files serve as standardized and preprocessed datasets for use in subsequent analysis and model development.
 
@@ -73,23 +73,23 @@ These files serve as standardized and preprocessed datasets for use in subsequen
 To ensure consistency and usability, raw datasets were cleaned and standardized before analysis and modeling. This included type conversion, missing value handling, metadata merging, and structured field parsing across multiple files.
 
 #### 3.1 movies_metadata
-The `movies_metadata` dataset is cleaned and enriched using the `keywords` and `credits` datasets to prepare for analysis:
+The `movies_metadata` dataset is cleaned and enriched using the `keywords` and `credits` datasets to prepare for further use:
 - Performed general data cleaning on fields such as `id`, `budget`, `popularity`, and `release_date`, including type conversions and removal of invalid rows.
 - Merged additional metadata (e.g. `keywords`, `cast`, and `crew`) from the `keywords` and `credits` datasets based on movie `id`.
 - Parsed structured string fields (e.g. `genres`, `cast`, `crew`, `keywords`, etc.) into native Python lists and dictionaries.
 - Simplified list/dictionary fields by retaining only the `id`, and saved the supporting metadata to `movie_metadata_supporting.xlsx`.
-- Removed irrelevant or redundant columns to streamline the dataset for downstream use.
+- Renamed columns for clarity and removed irrelevant or redundant columns to streamline the dataset for downstream use.
 - Saved the cleaned dataset to `movies_cleaned.csv`.
 
 #### 3.2 ratings_small & ratings
-The `ratings_small` and `ratings` datasets are cleaned and enriched using the `links` datasets to prepare for analysis:
+The `ratings_small` and `ratings` datasets are cleaned and enriched using the `links` datasets to prepare for further use:
 - Converted `timestamp` fields into readable datetime format and stored as `date_time`.
 - Mapped `movieId` to `imdb_id` using the `links` dataset for compatibility with external metadata.
-- Renamed columns for clarity and selected only relevant columns.
+- Renamed columns for clarity and removed irrelevant or redundant columns to streamline the dataset for downstream use.
 - Saved the cleaned dataset to `ratings_small_cleaned.csv` and `ratings_cleaned.csv`.
 
 ### 4. Exploratory Data Analysis
-Exploratory Data Analysis (EDA) was conducted on the `movies_cleaned` dataset to uncover patterns in production and audience reception:
+Exploratory Data Analysis (EDA) was conducted on the `movies_cleaned` dataset to uncover patterns in movie production and audience reception:
 - Relationship between genre and average vote rating  
 - Trends in movie count and vote count over release years  
 - Trends in average vote rating over release years  
@@ -108,7 +108,7 @@ Where:
 - **m**: number of votes threshold for qualified movies
 - **C**: mean rating across all movies
 
-Movies with vote counts above the threshold (using 75th percentile in this case) were considered "qualified" for ranking. The final `weighted_rating` was computed for each, and the top 20 were selected as overall recommendations. In addition, the top 10 highest-rated movies (by weighted score) were identified within each genre to support genre-based browsing.
+Movies with vote counts above the threshold (using 75th percentile in this case) were considered "qualified" for ranking. The final `weighted_rating` was computed for each, and the top 20 were selected as overall recommendations. In addition, the top 10 highest weighted rating movies were identified within each genre to support genre-based browsing.
 
 #### 5.2 Recommendation by Favorite Genre
 This method generates personalized recommendations by identifying the genres most preferred by a given user. The process begins by retrieving all movies the user has rated and selecting those with the highest scores. Based on the genre indicators of these top-rated movies, the user's favorite genres are inferred.
