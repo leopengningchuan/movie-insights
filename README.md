@@ -28,10 +28,14 @@ This project leverages [*The Movies Dataset*](https://www.kaggle.com/datasets/ro
 This project aims to analyze movie metadata using **Python Jupyter Notebook** to uncover patterns in film performance and audience preferences. It further develops and compares multiple types of recommendation systems to generate personalized movie suggestions based on different modeling approaches.
 
 ## File Structure
+
+Configuration & Metadata:
 - `README.md` – project overview
 - `LICENSE.txt` – license information
 - `.gitignore` – git ignore config
 - `.gitattributes` – git attributes config
+
+Core Logic:
 - `data_cleaning.ipynb` – notebook for data cleaning
 - `exploratory_data_analysis.ipynb` – notebook for exploratory data analysis
 - `recommendation_algorithm.ipynb` – notebook for recommendation algorithm
