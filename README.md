@@ -17,6 +17,7 @@ Exploring movie data with Python — from insights to recommendations
     - [5.2 Recommendation by Favorite Genre](#52-recommendation-by-favorite-genre)
     - [5.3 Collaborative Filtering](#53-collaborative-filtering)
 - [Future Improvements](#future-improvements)
+- [Acknowledgements](#acknowledgements)
 - [License](#license)
 
 ## Project Background
@@ -123,8 +124,8 @@ This method is effective for capturing nuanced user preferences based on communi
 - **Content-Based Movie Recommendation**: Implement a content recommendation algorithm to suggest movies with similar attributes (e.g., genre, cast, keywords).
 - **Popularity‐Adjusted Recommendation**: Blend personalized suggestions with popularity to balance novelty and relevance.
 
+## Acknowledgements
+- Thanks to [*Kaggle*](https://www.kaggle.com/datasets/rounakbanik/the-movies-dataset) and the original dataset contributor [Rounak Banik](https://www.kaggle.com/rounakbanik) for providing [*The Movies Dataset*](https://www.kaggle.com/datasets/rounakbanik/the-movies-dataset/data?status=pending&select=movies_metadata.csv).
+
 ## License
 This project is licensed under the MIT License - see the [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/leopengningchuan/movie-insights?tab=MIT-1-ov-file) file for details.
-
-## Acknowledgements
-- Thanks to [Kaggle](https://www.kaggle.com/datasets/rounakbanik/the-movies-dataset) and the original dataset contributor [Rounak Banik](https://www.kaggle.com/rounakbanik) for providing *The Movies Dataset*.
