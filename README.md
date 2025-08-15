@@ -1,4 +1,4 @@
-# movie-insights
+# Movie Insights
 Exploring movie data with Python — from insights to recommendations
 
 ## Table of Contents
